@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
+import edu.wpi.first.wpilibj.CANTalon; //this is from TalonSRX
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -13,9 +13,24 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	
+	// 										    CONSTANTS
+	
+	//Drive Base Motors
 	RobotDrive myRobot;
+	
+	//Driver Controls
 	Joystick stick;
+	
+	//TalonSRX's
+	CANTalon customMotorDescrip = new CANTalon(21); //creates Talon object w/ ID of "0"
+	
+	//Encoders
+	
+	//Checks amount of loops (for autonomous)
 	int autoLoopCounter;
+	
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -24,6 +39,8 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	myRobot = new RobotDrive(0,1,2,3);
     	stick = new Joystick(0);
+    	
+
     }
     
     /**
@@ -50,6 +67,8 @@ public class Robot extends IterativeRobot {
      * This function is called once each time the robot enters tele-operated mode
      */
     public void teleopInit(){
+    	customMotorDescrip.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
+    	System.out.println("hi!");
     }
 
     /**
@@ -57,6 +76,12 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         myRobot.arcadeDrive(stick);
+        if(stick.getRawButton(1)){ // A button
+        	customMotorDescrip.set(0.2);
+        	System.out.println(customMotorDescrip.getEncPosition());
+        }else{
+        	customMotorDescrip.set(0);
+        }
     }
     
     /**

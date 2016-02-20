@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.CANTalon; //this is from TalonSRX
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -14,33 +14,33 @@ import edu.wpi.first.wpilibj.CANTalon; //this is from TalonSRX
  */
 public class Robot extends IterativeRobot {
 	
+	//---------Object Declarations---------- 
 	
-	// 										    CONSTANTS
-	
-	//Drive Base Motors
+	//Drive Base
 	RobotDrive myRobot;
 	
 	//Driver Controls
-	Joystick stick;
-	
-	//TalonSRX's
-	CANTalon customMotorDescrip = new CANTalon(21); //creates Talon object w/ ID of "0"
-	
-	//Encoders
-	
+	Joystick driveStick, controlStick;
+		
 	//Checks amount of loops (for autonomous)
 	int autoLoopCounter;
 	
+	// System objects
+	IntakeRollers intake;
+	ArmSystem armSystem;
 	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
-    	myRobot = new RobotDrive(0,1,2,3);
-    	stick = new Joystick(0);
-    	
-
+    	myRobot = new RobotDrive(Constants.FRONT_LEFT, Constants.REAR_LEFT,
+    			Constants.FRONT_RIGHT, Constants.REAR_RIGHT);
+    	driveStick = new Joystick(0);
+    	controlStick = new Joystick(1);
+    	intake = new IntakeRollers(Constants.LEFT_INTAKE, Constants.RIGHT_INTAKE);
+    	armSystem = new ArmSystem(Constants.ARM_EXTENSION, Constants.ARM_PITCH,
+    			Constants.ARM_YAW);
     }
     
     /**
@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousInit() {
     	autoLoopCounter = 0;
+    	armSystem.setControlModePosition();
     }
 
     /**
@@ -67,21 +68,22 @@ public class Robot extends IterativeRobot {
      * This function is called once each time the robot enters tele-operated mode
      */
     public void teleopInit(){
-    	customMotorDescrip.changeControlMode(CANTalon.TalonControlMode.PercentVbus);
-    	System.out.println("hi!");
+    	
+    	//Change mode to PercentVbus
+    	armSystem.setControlModePercent();
+    	
+    	//Arm system
+    	armSystem.run(controlStick);
+    	
+    	//Intake rollers
+    	intake.run(controlStick);
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        myRobot.arcadeDrive(stick);
-        if(stick.getRawButton(1)){ // A button
-        	customMotorDescrip.set(0.2);
-        	System.out.println(customMotorDescrip.getEncPosition());
-        }else{
-        	customMotorDescrip.set(0);
-        }
+        myRobot.arcadeDrive(driveStick);
     }
     
     /**

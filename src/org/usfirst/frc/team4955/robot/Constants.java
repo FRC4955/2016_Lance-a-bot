@@ -1,5 +1,15 @@
 package org.usfirst.frc.team4955.robot;
 
+/**
+ * This class is to be referred to for all constants referencing system I/O port numbers, IDs, joystick
+ * button and axes numbers. 
+*/
+//TODO: 
+//Replicate team 254's implementation for their constants class, so that
+//we have the following unobtusive constants editing system: 
+//Modify all constants on one text file, then have the compiler read them from the
+//file.
+
 public class Constants {
 
 	//---------Buttons and Axes---------- 
@@ -34,7 +44,6 @@ public class Constants {
 	public static final int X_AXIS_ATTACK3 = 1;
 	public static final int Y_AXIS_ATTACK3 = 2;
 	public static final int Z_AXIS_ATTACK3 = 3; //Throttle
-	
 	
 	//---------Systems---------- 
 	

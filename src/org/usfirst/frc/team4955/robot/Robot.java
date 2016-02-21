@@ -89,18 +89,21 @@ public class Robot extends IterativeRobot {
     	//Change arm system Talon SRX control mode to PercentVbus
     	armSystem.setControlModePercent();
     	
-    	//Enable arm system
-    	armSystem.run(controlStick);
-    	
-    	//Enable intake rollers
-    	intake.run(controlStick);
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
+    	
+    	//Use ArcadeDrive (single joystick drive)
         myRobot.arcadeDrive(driveStick);
+        
+        //Run arm system routine
+    	armSystem.run(controlStick);
+    	
+    	//Run intake rollers routine
+    	intake.run(controlStick);
     }
     
     /**

@@ -57,7 +57,7 @@ public class Constants {
 	public static final int LEFT_INTAKE = 4;
 	public static final int RIGHT_INTAKE = 5;
 	
-	//Arm System, TalonSRX IDs
+	//Arm System, TalonSRX IDs (Refer to Robo-RIO config webpage for devide IDs)
 	public static final int ARM_EXTENSION = 0;
 	public static final int ARM_PITCH = 1;
 	

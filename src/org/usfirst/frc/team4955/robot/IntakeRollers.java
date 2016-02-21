@@ -3,6 +3,13 @@ package org.usfirst.frc.team4955.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 
+/**
+ * This class is to be used for creating IntakeRollers objects, which will allow the tele-operator to
+ * manipulate the intake rollers with an inward and outward suction.
+ * The intake rollers are controlled via an Attack 3 Joystick. The mapping is as follows:
+ * Button 8 -------> Intake out
+ * Button 7 -------> Intake in
+*/
 public class IntakeRollers {
 	
 	private Talon left, right;

@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousInit() {
     	autoLoopCounter = 0;
+    	//Change mode to Position
     	armSystem.setControlModePosition();
     }
 

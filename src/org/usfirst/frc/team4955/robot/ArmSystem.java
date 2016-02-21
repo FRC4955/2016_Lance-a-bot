@@ -3,7 +3,14 @@ package org.usfirst.frc.team4955.robot;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
-
+/**
+ * This class is to be used for creating ArmSystem objects, which will allow the tele-operator to
+ * manipulate the arm apparatus of the robot with three different degrees of control: yaw, pitch and extension.
+ * The arm apparatus is controlled via an XBOX 360 controller. The mapping is as follows:
+ * LT and RT Triggers -------> yaw (left and right)
+ * Left joystick, y-axis ----> pitch (up and down)
+ * Right joystick, y-axis ---> extension, retraction (up and down)
+*/
 public class ArmSystem {
 
 	private CANTalon armExtension, armPitch;

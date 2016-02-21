@@ -47,13 +47,13 @@ public class Constants {
 	
 	//---------Systems---------- 
 	
-	//Drivebase
+	//Drivebase, Talons
 	public static final int FRONT_LEFT = 0;
 	public static final int REAR_LEFT = 1;
 	public static final int FRONT_RIGHT = 2; 
 	public static final int REAR_RIGHT = 3;
 	
-	//Intake System
+	//Intake System, Talons
 	public static final int LEFT_INTAKE = 4;
 	public static final int RIGHT_INTAKE = 5;
 	
@@ -64,6 +64,6 @@ public class Constants {
 	//Arm System, Talon(s)
 	public static final int ARM_YAW = 6;
 	
-	//---------Miscellaneous---------- 
+	//---------Functional Constants---------- 
 	public static final double JOYSTICK_ZERO_THRESHOLD = 0.1d;
 }

@@ -62,7 +62,7 @@ public class Constants {
 	public static final int ARM_PITCH = 1;
 	
 	//Arm System, Talon(s)
-	public static final int ARM_YAW = 2;
+	public static final int ARM_YAW = 6;
 	
 	//---------Miscellaneous---------- 
 	public static final double JOYSTICK_ZERO_THRESHOLD = 0.1d;

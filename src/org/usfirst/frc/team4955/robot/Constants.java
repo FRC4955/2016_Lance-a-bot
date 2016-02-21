@@ -5,7 +5,7 @@ public class Constants {
 	//---------Buttons and Axes---------- 
 	
 	//XBOX controller
-	public static final int A_BUTTON_XBOX= 1;
+	public static final int A_BUTTON_XBOX = 1;
 	public static final int B_BUTTON_XBOX = 2;
 	public static final int Y_BUTTON_XBOX = 4;
 	public static final int X_BUTTON_XBOX = 3;
@@ -32,8 +32,8 @@ public class Constants {
 	public static final int TEN_BUTTON_ATTACK3 = 10;
 	public static final int ELEVEN_BUTTON_ATTACK3 = 11;
 	public static final int X_AXIS_ATTACK3 = 1;
-	public static final int Y_AXIS_ATTACK3= 2;
-	public static final int Z_AXIS_ATTACK3= 3; //Throttle
+	public static final int Y_AXIS_ATTACK3 = 2;
+	public static final int Z_AXIS_ATTACK3 = 3; //Throttle
 	
 	
 	//---------Systems---------- 
@@ -48,11 +48,11 @@ public class Constants {
 	public static final int LEFT_INTAKE = 4;
 	public static final int RIGHT_INTAKE = 5;
 	
-	//Arm System, TalonSRX IDS
+	//Arm System, TalonSRX IDs
 	public static final int ARM_EXTENSION = 0;
 	public static final int ARM_PITCH = 1;
 	
-	//Arm System, Talons
+	//Arm System, Talon(s)
 	public static final int ARM_YAW = 2;
 	
 	//---------Miscellaneous---------- 

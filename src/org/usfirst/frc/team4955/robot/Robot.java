@@ -19,7 +19,9 @@ public class Robot extends IterativeRobot {
 	//Drive Base
 	RobotDrive myRobot;
 	
-	//Driver Controls
+	//Pilot and Operator Controls:
+	//driveStick ------------> Pilot (ATTACK 3 Joystick)
+	//controlStick ----------> Operator (XBOX 360 Controller)
 	Joystick driveStick, controlStick;
 		
 	//Checks amount of loops (for autonomous)
@@ -34,10 +36,23 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	
+    	//---------Object Instantiations----------
+    	
+    	//Initialize drive base with motor controllers in order:
+    	//front left, rear left, front right and rear right
     	myRobot = new RobotDrive(Constants.FRONT_LEFT, Constants.REAR_LEFT,
     			Constants.FRONT_RIGHT, Constants.REAR_RIGHT);
+    	
+    	//Initialize joysticks with ports:
+    	//driveStick ----> 0
+    	//controlStick --> 1
     	driveStick = new Joystick(0);
     	controlStick = new Joystick(1);
+    	
+    	//Intialize subsystems with respective arguments:
+    	//intake -------> left motor PWM, right motor PWM
+    	//arm system ---> extender motor Talon SRX ID, pitch control motor Talon SRX ID, yaw control motor Talon ID
     	intake = new IntakeRollers(Constants.LEFT_INTAKE, Constants.RIGHT_INTAKE);
     	armSystem = new ArmSystem(Constants.ARM_EXTENSION, Constants.ARM_PITCH,
     			Constants.ARM_YAW);
@@ -48,7 +63,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousInit() {
     	autoLoopCounter = 0;
-    	//Change mode to Position
+    	
+    	//Change arm system Talon SRX control mode to Position
     	armSystem.setControlModePosition();
     }
 
@@ -70,13 +86,13 @@ public class Robot extends IterativeRobot {
      */
     public void teleopInit(){
     	
-    	//Change mode to PercentVbus
+    	//Change arm system Talon SRX control mode to PercentVbus
     	armSystem.setControlModePercent();
     	
-    	//Arm system
+    	//Enable arm system
     	armSystem.run(controlStick);
     	
-    	//Intake rollers
+    	//Enable intake rollers
     	intake.run(controlStick);
     }
 

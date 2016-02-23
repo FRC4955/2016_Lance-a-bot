@@ -54,7 +54,13 @@ public class Constants {
 	
 	//Arm System, Talons
 	public static final int ARM_YAW = 2;
+
+	// Arm system limit switches
+	public static final int YAW_LEFT_SWITCH = 0;
+	public static final int YAW_RIGHT_SWITCH = 1;
+	public static final int PITCH_SWITCH = 2;
+	public static final int EXTEND_SWITCH = 3;
 	
 	//---------Miscellaneous---------- 
-	public static final double JOYSTICK_ZERO_THRESHOLD = 0.1d;
+	public static final double JOYSTICK_ZERO_THRESHOLD = 0.1;
 }

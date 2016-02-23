@@ -20,7 +20,7 @@ public class Robot extends IterativeRobot {
 	RobotDrive myRobot;
 	
 	//Driver Controls
-	Joystick driveStick, controlStick;
+	Joystick driveStickLeft, driveStickRight, controlStick;
 		
 	//Checks amount of loops (for autonomous)
 	int autoLoopCounter;
@@ -36,11 +36,11 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
     	myRobot = new RobotDrive(Constants.FRONT_LEFT, Constants.REAR_LEFT,
     			Constants.FRONT_RIGHT, Constants.REAR_RIGHT);
-    	driveStick = new Joystick(0);
-    	controlStick = new Joystick(1);
+    	driveStickLeft = new Joystick(0);
+    	driveStickRight = new Joystick(1);
+    	controlStick = new Joystick(2);
     	intake = new IntakeRollers(Constants.LEFT_INTAKE, Constants.RIGHT_INTAKE);
-    	armSystem = new ArmSystem(Constants.ARM_EXTENSION, Constants.ARM_PITCH,
-    			Constants.ARM_YAW);
+    	armSystem = new ArmSystem();
     }
     
     /**
@@ -72,18 +72,21 @@ public class Robot extends IterativeRobot {
     	//Change mode to PercentVbus
     	armSystem.setControlModePercent();
     	
-    	//Arm system
-    	armSystem.run(controlStick);
-    	
-    	//Intake rollers
-    	intake.run(controlStick);
     }
 
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-        myRobot.arcadeDrive(driveStick);
+    	
+        myRobot.tankDrive(driveStickLeft, driveStickRight);
+
+    	//Arm system
+    	armSystem.run(controlStick);
+    	
+    	//Intake rollers
+    	intake.run(controlStick);
+    	
     }
     
     /**

@@ -1,11 +1,21 @@
 package org.usfirst.frc.team4955.robot;
 
+/**
+ * This class is to be referred to for all constants referencing system I/O port numbers, IDs, joystick
+ * button and axes numbers. 
+*/
+//TODO: 
+//Replicate team 254's implementation for their constants class, so that
+//we have the following unobtusive constants editing system: 
+//Modify all constants on one text file, then have the compiler read them from the
+//file.
+
 public class Constants {
 
 	//---------Buttons and Axes---------- 
 	
 	//XBOX controller
-	public static final int A_BUTTON_XBOX= 1;
+	public static final int A_BUTTON_XBOX = 1;
 	public static final int B_BUTTON_XBOX = 2;
 	public static final int Y_BUTTON_XBOX = 4;
 	public static final int X_BUTTON_XBOX = 3;
@@ -32,23 +42,22 @@ public class Constants {
 	public static final int TEN_BUTTON_ATTACK3 = 10;
 	public static final int ELEVEN_BUTTON_ATTACK3 = 11;
 	public static final int X_AXIS_ATTACK3 = 1;
-	public static final int Y_AXIS_ATTACK3= 2;
-	public static final int Z_AXIS_ATTACK3= 3; //Throttle
-	
+	public static final int Y_AXIS_ATTACK3 = 2;
+	public static final int Z_AXIS_ATTACK3 = 3; //Throttle
 	
 	//---------Systems---------- 
 	
-	//Drivebase
+	//Drivebase, Talons
 	public static final int FRONT_LEFT = 0;
 	public static final int REAR_LEFT = 1;
 	public static final int FRONT_RIGHT = 2; 
 	public static final int REAR_RIGHT = 3;
 	
-	//Intake System
+	//Intake System, Talons
 	public static final int LEFT_INTAKE = 4;
 	public static final int RIGHT_INTAKE = 5;
 	
-	//Arm System, TalonSRX IDS
+	//Arm System, TalonSRX IDs (Refer to Robo-RIO config webpage for devide IDs)
 	public static final int ARM_EXTENSION = 0;
 	public static final int ARM_PITCH = 1;
 	

@@ -34,11 +34,20 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	
+    	//---------Object Instantiations----------
+    	
+    	//Initialize drive base with motor controllers in order:
+    	//front left, rear left, front right and rear right
     	myRobot = new RobotDrive(Constants.FRONT_LEFT, Constants.REAR_LEFT,
     			Constants.FRONT_RIGHT, Constants.REAR_RIGHT);
     	driveStickLeft = new Joystick(0);
     	driveStickRight = new Joystick(1);
     	controlStick = new Joystick(2);
+    	
+    	//Intialize subsystems with respective arguments:
+    	//intake -------> left motor PWM, right motor PWM
+    	//arm system ---> extender motor Talon SRX ID, pitch control motor Talon SRX ID, yaw control motor Talon ID
     	intake = new IntakeRollers(Constants.LEFT_INTAKE, Constants.RIGHT_INTAKE);
     	armSystem = new ArmSystem();
     }
@@ -48,6 +57,8 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousInit() {
     	autoLoopCounter = 0;
+    	
+    	//Change arm system Talon SRX control mode to Position
     	armSystem.setControlModePosition();
     }
 
@@ -69,7 +80,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopInit(){
     	
-    	//Change mode to PercentVbus
+    	//Change arm system Talon SRX control mode to PercentVbus
     	armSystem.setControlModePercent();
     	
     }

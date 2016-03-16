@@ -33,14 +33,8 @@ public class Robot extends IterativeRobot {
 	ArmSystem armSystem;
 	
 	//Camera vars
-	
-	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-
-        // the camera name (ex "cam0") can be found through the roborio web interface
-        
-        session = NIVision.IMAQdxOpenCamera("cam0",
-                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-        NIVision.IMAQdxConfigureGrab(session);
+	int session;
+	Image frame;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -58,11 +52,19 @@ public class Robot extends IterativeRobot {
     	driveStickRight = new Joystick(1);
     	controlStick = new Joystick(2);
     	
+    	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // The camera name (ex "cam0") can be found through the roborio web interface
+        session = NIVision.IMAQdxOpenCamera("cam0",
+                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
+    	
     	//Intialize subsystems with respective arguments:
     	//intake -------> left motor PWM, right motor PWM
     	//arm system ---> extender motor Talon SRX ID, pitch control motor Talon SRX ID, yaw control motor Talon ID
     	intake = new IntakeRollers(Constants.LEFT_INTAKE, Constants.RIGHT_INTAKE);
     	armSystem = new ArmSystem();
+    	
     }
     
     /**
@@ -96,7 +98,7 @@ public class Robot extends IterativeRobot {
     	//Change arm system Talon SRX control mode to PercentVbus
     	armSystem.setControlModePercent();
     	
-    	//Start canera server
+    	//Start camera server
     	NIVision.IMAQdxStartAcquisition(session);
     	
     }
@@ -126,4 +128,13 @@ public class Robot extends IterativeRobot {
     	LiveWindow.run();
     }
     
+    /**
+     * This function is called once initially when the robot is disabled
+     */
+    
+    public void disabledInit() {
+    	if (session != null) {
+    		NIVision.IMAQdxStopAcquisition(session);
+    	}
+    }
 }

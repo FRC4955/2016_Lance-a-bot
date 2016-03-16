@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
+import com.ni.vision.NIVision;
+import edu.wpi.first.wpilibj.CameraServer;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -25,9 +28,19 @@ public class Robot extends IterativeRobot {
 	//Checks amount of loops (for autonomous)
 	int autoLoopCounter;
 	
-	// System objects
+	//System objects
 	IntakeRollers intake;
 	ArmSystem armSystem;
+	
+	//Camera vars
+	
+	frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+
+        // the camera name (ex "cam0") can be found through the roborio web interface
+        
+        session = NIVision.IMAQdxOpenCamera("cam0",
+                NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+        NIVision.IMAQdxConfigureGrab(session);
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -83,6 +96,9 @@ public class Robot extends IterativeRobot {
     	//Change arm system Talon SRX control mode to PercentVbus
     	armSystem.setControlModePercent();
     	
+    	//Start canera server
+    	NIVision.IMAQdxStartAcquisition(session);
+    	
     }
 
     /**
@@ -98,6 +114,9 @@ public class Robot extends IterativeRobot {
     	//Intake rollers
     	intake.run(controlStick);
     	
+    	//Get current frame
+    	 NIVision.IMAQdxGrab(session, frame, 1);
+         CameraServer.getInstance().setImage(frame);
     }
     
     /**
